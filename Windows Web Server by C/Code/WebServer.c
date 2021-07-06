@@ -8,13 +8,13 @@
 #include <ws2tcpip.h>
 #define MAX_LEN 1001000
 #define NAME_LEN 101
-
+//打印IP地址和端口号
 void PrintIP(int op,int ip, int port) {
     char *str = op ? "Client" : "Server";
     printf("%s ip : %d.%d.%d.%d, port = %d\n",str,ip&255,(ip>>8)&255,
             (ip>>16)&255,(ip>>24)&255, port);
 }
-
+//初始化网络
 void init_Network() {
     WSADATA wsaData;
     int nRet;
@@ -23,7 +23,7 @@ void init_Network() {
         exit(0);
     }
 }
-
+//从http报文中获取文件名
 void* GetFileName(char *name, const char *s) {
     char *p = strstr(s, "GET ");
     if (p == NULL) return NULL;
@@ -67,7 +67,7 @@ void Read_configurations(const char *cfilename, int *WEBPORT, char *root) {
         }
     }
 }
-
+//服务器返回的文件内容
 char file_contents[MAX_LEN];
 
 void GetContent(FILE *f) {
@@ -78,7 +78,7 @@ void GetContent(FILE *f) {
         file_contents[cur++] = c;
     }
 }
-
+//服务器向客户端发送文件(以字符方式)
 int sendHTML(char header[], const char *filename, int clnt_sock) {
     FILE* f = fopen(filename, "r");
     if (f == NULL)return -1;
@@ -89,7 +89,7 @@ int sendHTML(char header[], const char *filename, int clnt_sock) {
     const char *tmp = file_contents;
     return ~send(clnt_sock, header, strlen(header), 0) && ~send(clnt_sock, tmp, sz, 0);
 }
-
+//保存日志文件
 void service_logs(char *s) {
     FILE *fp = fopen("service.log", "a");
     fprintf(fp, "-------------------------------------------------------------------------\n");
