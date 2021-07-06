@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "types.h": "c",
+        "crtdefs.h": "c",
+        "stdlib.h": "c",
+        "memlib.h": "c"
+    }
+}
