@@ -2,10 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <windows.h>
 #include <winsock.h>
 #include <winsock2.h>
+#include <windows.h>
 #include <ws2tcpip.h>
+
 #define MAX_LEN 1001000
 #define NAME_LEN 101
 //打印IP地址和端口号
